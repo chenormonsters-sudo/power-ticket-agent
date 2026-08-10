@@ -17,30 +17,35 @@ from backend.graphs.workflow_graph import build_workflow_graph
 
 
 @pytest.fixture(autouse=True)
+def _mock_vector_increment(monkeypatch):
+    """单元测试隔离向量缓存写入（真实向量增量由 integration 测试覆盖），
+    避免测试污染 knowledge_base/index 缓存导致全量重编码。"""
+    monkeypatch.setattr(
+        'backend.agents.debrief.kb_updater.apply_vector_increment',
+        lambda team=None: 0,
+    )
+
+
+@pytest.fixture(autouse=True)
 def _clean_cases():
-    """每个测试前后：备份/恢复案例库与向量缓存（防测试污染真实数据，且保持两者一致）。"""
+    """每个测试前后：备份/恢复案例库（防测试污染真实数据）。
+    向量缓存不再备份——单元测试已隔离其写入（见 _mock_vector_increment）。"""
     import shutil
     from backend.agents.debrief.kb_updater import CASES_PATH
-    kb_index = r'D:\edu_agent\knowledge_base\index'
     backups = {}
-    # 备份案例库（不能只删：向量缓存含案例，删案例会导致缓存长度失配触发全量重建）
     if os.path.exists(CASES_PATH):
         tmp = CASES_PATH + '.bak'
         shutil.copy2(CASES_PATH, tmp)
-        backups[CASES_PATH] = tmp
-    # 备份向量缓存
-    for fn in ['vectors.npy', 'vectors_meta.json']:
-        p = os.path.join(kb_index, fn)
-        if os.path.exists(p):
-            tmp = p + '.bak'
-            shutil.copy2(p, tmp)
-            backups[fn] = tmp
+        backups['cases.json'] = tmp
     yield
-    for fn, tmp in backups.items():
-        p = fn if fn.endswith('.json') or fn.endswith('.npy') else fn
-        if os.path.exists(p):
-            os.remove(p)
-        shutil.move(tmp, p)
+    # 恢复备份；无备份则清理测试残留
+    if 'cases.json' in backups:
+        tmp = backups['cases.json']
+        if os.path.exists(CASES_PATH):
+            os.remove(CASES_PATH)
+        shutil.move(tmp, CASES_PATH)
+    elif os.path.exists(CASES_PATH):
+        os.remove(CASES_PATH)
 
 
 def _feedback(**over):
