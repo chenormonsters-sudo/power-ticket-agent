@@ -1,0 +1,32 @@
+# 内部材料（严禁入库）
+INTERNAL.md
+
+# 环境与密钥
+.env.local
+.env
+*.key
+
+# 模型文件（大文件不入库，本地部署）
+models/
+
+# 模拟数据与知识库（涉密脱敏，不入库）
+knowledge_base/
+data/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# IDE
+.idea/
+.vscode/
+
+# 缓存与日志
+.pytest_cache/
+*.log
+
+# 评测缓存（查询向量，可再生成）
+eval/query_vectors.npy
+eval/query_meta.json

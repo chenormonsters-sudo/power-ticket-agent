@@ -1,0 +1,502 @@
+[
+  {
+    "query": "#5炉0米0米干渣机磨损严重",
+    "expected_doc_id": "FAQ-5炉-0942",
+    "expected_team": "锅炉"
+  },
+  {
+    "query": "#6炉12.6米给煤机反馈信号丢失",
+    "expected_doc_id": "FAQ-6炉-2722",
+    "expected_team": "锅炉"
+  },
+  {
+    "query": "#6炉0米至尿素站管路漏风",
+    "expected_doc_id": "FAQ-6炉-0042",
+    "expected_team": "锅炉"
+  },
+  {
+    "query": "#5炉12.6米一次/送风机风道暖风器管道管道泄漏",
+    "expected_doc_id": "FAQ-5炉-0391",
+    "expected_team": "锅炉"
+  },
+  {
+    "query": "#6炉0米磨煤机本体跳闸",
+    "expected_doc_id": "FAQ-6炉-1432",
+    "expected_team": "锅炉"
+  },
+  {
+    "query": "#6炉吹灰系统本体管阀温度异常升高",
+    "expected_doc_id": "FAQ-6炉-0842",
+    "expected_team": "锅炉"
+  },
+  {
+    "query": "#5炉12.6米空预器执行器卡死",
+    "expected_doc_id": "FAQ-5炉-2502",
+    "expected_team": "锅炉"
+  },
+  {
+    "query": "#5炉12.6米燃油系统异响",
+    "expected_doc_id": "FAQ-5炉-2147",
+    "expected_team": "锅炉"
+  },
+  {
+    "query": "#6炉0米启动疏水泵及管道温度异常升高",
+    "expected_doc_id": "FAQ-6炉-1742",
+    "expected_team": "锅炉"
+  },
+  {
+    "query": "#5炉0米火检风机风门开度异常",
+    "expected_doc_id": "FAQ-5炉-1033",
+    "expected_team": "锅炉"
+  },
+  {
+    "query": "#5炉吹灰系统过热器减温水系统反馈信号丢失",
+    "expected_doc_id": "FAQ-5炉-2880",
+    "expected_team": "锅炉"
+  },
+  {
+    "query": "#6炉吹灰系统长吹灰器振动超标",
+    "expected_doc_id": "FAQ-6炉-0348",
+    "expected_team": "锅炉"
+  },
+  {
+    "query": "#6炉0米磨煤机本体漏粉",
+    "expected_doc_id": "FAQ-6炉-2316",
+    "expected_team": "锅炉"
+  },
+  {
+    "query": "#5炉吹灰系统短吹灰器异响",
+    "expected_doc_id": "FAQ-5炉-2143",
+    "expected_team": "锅炉"
+  },
+  {
+    "query": "#6炉0米暖风器疏水泵出力不足",
+    "expected_doc_id": "FAQ-6炉-1956",
+    "expected_team": "锅炉"
+  },
+  {
+    "query": "#5炉0米磨煤机本体冷却水流量不足",
+    "expected_doc_id": "FAQ-5炉-1379",
+    "expected_team": "锅炉"
+  },
+  {
+    "query": "#6炉0米启动疏水泵及管道堵塞",
+    "expected_doc_id": "FAQ-6炉-0710",
+    "expected_team": "锅炉"
+  },
+  {
+    "query": "#6炉0米等离子暖风器疏水泵及管道积粉",
+    "expected_doc_id": "FAQ-6炉-1688",
+    "expected_team": "锅炉"
+  },
+  {
+    "query": "#6炉12.6米喷燃器着火",
+    "expected_doc_id": "FAQ-6炉-2796",
+    "expected_team": "锅炉"
+  },
+  {
+    "query": "#5炉0米至尿素站管路卡涩",
+    "expected_doc_id": "FAQ-5炉-1383",
+    "expected_team": "锅炉"
+  },
+  {
+    "query": "汽机6.3米盘车装置风门开度异常",
+    "expected_doc_id": "FAQ-汽机-1105",
+    "expected_team": "汽机"
+  },
+  {
+    "query": "汽机0米给水泵B结垢",
+    "expected_doc_id": "FAQ-汽机-2017",
+    "expected_team": "汽机"
+  },
+  {
+    "query": "汽机0米前置泵振动超标",
+    "expected_doc_id": "FAQ-汽机-3055",
+    "expected_team": "汽机"
+  },
+  {
+    "query": "汽机12.6米低压加热器漏风",
+    "expected_doc_id": "FAQ-汽机-2284",
+    "expected_team": "汽机"
+  },
+  {
+    "query": "汽机12.6米疏水扩容器煤粉自流",
+    "expected_doc_id": "FAQ-汽机-3182",
+    "expected_team": "汽机"
+  },
+  {
+    "query": "汽机6.3米EH油系统保温脱落",
+    "expected_doc_id": "FAQ-汽机-2208",
+    "expected_team": "汽机"
+  },
+  {
+    "query": "汽机6.3米顶轴油泵执行器卡死",
+    "expected_doc_id": "FAQ-汽机-1548",
+    "expected_team": "汽机"
+  },
+  {
+    "query": "汽机6.3米高压缸反馈信号丢失",
+    "expected_doc_id": "FAQ-汽机-1061",
+    "expected_team": "汽机"
+  },
+  {
+    "query": "汽机6.3米高压缸风门开度异常",
+    "expected_doc_id": "FAQ-汽机-0128",
+    "expected_team": "汽机"
+  },
+  {
+    "query": "汽机12.6米凝汽器管道泄漏",
+    "expected_doc_id": "FAQ-汽机-2753",
+    "expected_team": "汽机"
+  },
+  {
+    "query": "汽机12.6米真空泵振动超标",
+    "expected_doc_id": "FAQ-汽机-1651",
+    "expected_team": "汽机"
+  },
+  {
+    "query": "公用系统尿素站冷却水流量不足",
+    "expected_doc_id": "FAQ-公用系统-2404",
+    "expected_team": "汽机"
+  },
+  {
+    "query": "汽机6.3米EH油系统磨损严重",
+    "expected_doc_id": "FAQ-汽机-0351",
+    "expected_team": "汽机"
+  },
+  {
+    "query": "汽机0米给水泵A振动超标",
+    "expected_doc_id": "FAQ-汽机-2781",
+    "expected_team": "汽机"
+  },
+  {
+    "query": "汽机0米轴加风机A反馈信号丢失",
+    "expected_doc_id": "FAQ-汽机-2569",
+    "expected_team": "汽机"
+  },
+  {
+    "query": "汽机6.3米润滑油泵管道泄漏",
+    "expected_doc_id": "FAQ-汽机-1621",
+    "expected_team": "汽机"
+  },
+  {
+    "query": "汽机0米给水泵B风门开度异常",
+    "expected_doc_id": "FAQ-汽机-1791",
+    "expected_team": "汽机"
+  },
+  {
+    "query": "汽机0米凝结水泵A积粉",
+    "expected_doc_id": "FAQ-汽机-0014",
+    "expected_team": "汽机"
+  },
+  {
+    "query": "汽机6.3米顶轴油泵振动超标",
+    "expected_doc_id": "FAQ-汽机-1154",
+    "expected_team": "汽机"
+  },
+  {
+    "query": "汽机6.3米低压缸冷却水流量不足",
+    "expected_doc_id": "FAQ-汽机-1521",
+    "expected_team": "汽机"
+  },
+  {
+    "query": "电气厂房启备变电流波动大",
+    "expected_doc_id": "FAQ-电气-1641",
+    "expected_team": "电气"
+  },
+  {
+    "query": "电气MCC段直流充电模块保温脱落",
+    "expected_doc_id": "FAQ-电气-1900",
+    "expected_team": "电气"
+  },
+  {
+    "query": "电气厂房6kV开关柜A段冷却水流量不足",
+    "expected_doc_id": "FAQ-电气-1273",
+    "expected_team": "电气"
+  },
+  {
+    "query": "电气厂房6kV开关柜A段漏油",
+    "expected_doc_id": "FAQ-电气-1316",
+    "expected_team": "电气"
+  },
+  {
+    "query": "电气厂房400V开关柜A段振动超标",
+    "expected_doc_id": "FAQ-电气-2300",
+    "expected_team": "电气"
+  },
+  {
+    "query": "公用系统尿素站膨胀异常",
+    "expected_doc_id": "FAQ-公用系统-2398",
+    "expected_team": "电气"
+  },
+  {
+    "query": "电气厂房柴油发电机积粉",
+    "expected_doc_id": "FAQ-电气-0043",
+    "expected_team": "电气"
+  },
+  {
+    "query": "电气厂房主变压器堵塞",
+    "expected_doc_id": "FAQ-电气-2423",
+    "expected_team": "电气"
+  },
+  {
+    "query": "电气MCC段软启动柜磨损严重",
+    "expected_doc_id": "FAQ-电气-0917",
+    "expected_team": "电气"
+  },
+  {
+    "query": "电气厂房保安电源开关异响",
+    "expected_doc_id": "FAQ-电气-0652",
+    "expected_team": "电气"
+  },
+  {
+    "query": "电气MCC段MCC配电柜反馈信号丢失",
+    "expected_doc_id": "FAQ-电气-2590",
+    "expected_team": "电气"
+  },
+  {
+    "query": "电气MCC段UPS不间断电源跳闸",
+    "expected_doc_id": "FAQ-电气-1702",
+    "expected_team": "电气"
+  },
+  {
+    "query": "电气MCC段MCC配电柜油压异常",
+    "expected_doc_id": "FAQ-电气-2985",
+    "expected_team": "电气"
+  },
+  {
+    "query": "电气MCC段直流充电模块保护误动",
+    "expected_doc_id": "FAQ-电气-3040",
+    "expected_team": "电气"
+  },
+  {
+    "query": "电气厂房6kV开关柜B段出力不足",
+    "expected_doc_id": "FAQ-电气-0279",
+    "expected_team": "电气"
+  },
+  {
+    "query": "电气厂房保安电源开关保护误动",
+    "expected_doc_id": "FAQ-电气-0145",
+    "expected_team": "电气"
+  },
+  {
+    "query": "电气厂房高压厂用变煤粉自流",
+    "expected_doc_id": "FAQ-电气-1115",
+    "expected_team": "电气"
+  },
+  {
+    "query": "电气厂房保安电源开关漏灰",
+    "expected_doc_id": "FAQ-电气-1199",
+    "expected_team": "电气"
+  },
+  {
+    "query": "电气厂房400V开关柜B段振动超标",
+    "expected_doc_id": "FAQ-电气-3155",
+    "expected_team": "电气"
+  },
+  {
+    "query": "电气厂房励磁机出力不足",
+    "expected_doc_id": "FAQ-电气-2268",
+    "expected_team": "电气"
+  },
+  {
+    "query": "燃除输煤2号输煤皮带保温脱落",
+    "expected_doc_id": "FAQ-燃除-1317",
+    "expected_team": "燃除"
+  },
+  {
+    "query": "燃除除灰真空皮带机反馈信号丢失",
+    "expected_doc_id": "FAQ-燃除-2412",
+    "expected_team": "燃除"
+  },
+  {
+    "query": "燃除除灰真空皮带机异响",
+    "expected_doc_id": "FAQ-燃除-0799",
+    "expected_team": "燃除"
+  },
+  {
+    "query": "公用系统尿素站膨胀异常",
+    "expected_doc_id": "FAQ-公用系统-0524",
+    "expected_team": "燃除"
+  },
+  {
+    "query": "燃除除灰灰库气化风机煤粉自流",
+    "expected_doc_id": "FAQ-燃除-0490",
+    "expected_team": "燃除"
+  },
+  {
+    "query": "燃除输煤碎煤机给煤量波动",
+    "expected_doc_id": "FAQ-燃除-1307",
+    "expected_team": "燃除"
+  },
+  {
+    "query": "燃除输煤除尘器风机积粉",
+    "expected_doc_id": "FAQ-燃除-1777",
+    "expected_team": "燃除"
+  },
+  {
+    "query": "公用系统尿素站冷却水流量不足",
+    "expected_doc_id": "FAQ-公用系统-3177",
+    "expected_team": "燃除"
+  },
+  {
+    "query": "燃除输煤煤仓间犁煤器密封失效",
+    "expected_doc_id": "FAQ-燃除-2993",
+    "expected_team": "燃除"
+  },
+  {
+    "query": "公用系统间冷塔跳闸",
+    "expected_doc_id": "FAQ-公用系统-0488",
+    "expected_team": "燃除"
+  },
+  {
+    "query": "燃除输煤除尘器风机着火",
+    "expected_doc_id": "FAQ-燃除-1248",
+    "expected_team": "燃除"
+  },
+  {
+    "query": "燃除输煤1号输煤皮带密封失效",
+    "expected_doc_id": "FAQ-燃除-2878",
+    "expected_team": "燃除"
+  },
+  {
+    "query": "燃除除灰脱硫浆液循环泵保护误动",
+    "expected_doc_id": "FAQ-燃除-1326",
+    "expected_team": "燃除"
+  },
+  {
+    "query": "燃除输煤除尘器风机着火",
+    "expected_doc_id": "FAQ-燃除-1626",
+    "expected_team": "燃除"
+  },
+  {
+    "query": "燃除除灰电除尘器A列漏风",
+    "expected_doc_id": "FAQ-燃除-1520",
+    "expected_team": "燃除"
+  },
+  {
+    "query": "燃除除灰灰库气化风机振动超标",
+    "expected_doc_id": "FAQ-燃除-0433",
+    "expected_team": "燃除"
+  },
+  {
+    "query": "公用系统尿素站密封失效",
+    "expected_doc_id": "FAQ-公用系统-1973",
+    "expected_team": "燃除"
+  },
+  {
+    "query": "燃除输煤除尘器风机跳闸",
+    "expected_doc_id": "FAQ-燃除-1075",
+    "expected_team": "燃除"
+  },
+  {
+    "query": "燃除输煤3号输煤皮带保温脱落",
+    "expected_doc_id": "FAQ-燃除-3077",
+    "expected_team": "燃除"
+  },
+  {
+    "query": "燃除输煤除尘器风机跳闸",
+    "expected_doc_id": "FAQ-燃除-2195",
+    "expected_team": "燃除"
+  },
+  {
+    "query": "公用系统间冷塔卡涩",
+    "expected_doc_id": "FAQ-公用系统-0575",
+    "expected_team": "热控"
+  },
+  {
+    "query": "公用系统间冷塔跳闸",
+    "expected_doc_id": "FAQ-公用系统-0488",
+    "expected_team": "热控"
+  },
+  {
+    "query": "公用系统尿素站漏风",
+    "expected_doc_id": "FAQ-公用系统-1583",
+    "expected_team": "热控"
+  },
+  {
+    "query": "公用系统尿素站跳闸",
+    "expected_doc_id": "FAQ-公用系统-0532",
+    "expected_team": "热控"
+  },
+  {
+    "query": "公用系统间冷塔堵塞",
+    "expected_doc_id": "FAQ-公用系统-0666",
+    "expected_team": "热控"
+  },
+  {
+    "query": "公用系统间冷塔电流波动大",
+    "expected_doc_id": "FAQ-公用系统-1643",
+    "expected_team": "热控"
+  },
+  {
+    "query": "公用系统尿素站异响",
+    "expected_doc_id": "FAQ-公用系统-1416",
+    "expected_team": "热控"
+  },
+  {
+    "query": "公用系统尿素站保温脱落",
+    "expected_doc_id": "FAQ-公用系统-0482",
+    "expected_team": "热控"
+  },
+  {
+    "query": "公用系统间冷塔跳闸",
+    "expected_doc_id": "FAQ-公用系统-3012",
+    "expected_team": "热控"
+  },
+  {
+    "query": "公用系统尿素站电流波动大",
+    "expected_doc_id": "FAQ-公用系统-0765",
+    "expected_team": "热控"
+  },
+  {
+    "query": "公用系统尿素站磨损严重",
+    "expected_doc_id": "FAQ-公用系统-2001",
+    "expected_team": "热控"
+  },
+  {
+    "query": "公用系统尿素站反馈信号丢失",
+    "expected_doc_id": "FAQ-公用系统-2933",
+    "expected_team": "热控"
+  },
+  {
+    "query": "公用系统尿素站漏粉",
+    "expected_doc_id": "FAQ-公用系统-0702",
+    "expected_team": "热控"
+  },
+  {
+    "query": "公用系统尿素站轴承温度高",
+    "expected_doc_id": "FAQ-公用系统-2838",
+    "expected_team": "热控"
+  },
+  {
+    "query": "公用系统间冷塔着火",
+    "expected_doc_id": "FAQ-公用系统-0896",
+    "expected_team": "热控"
+  },
+  {
+    "query": "公用系统尿素站密封失效",
+    "expected_doc_id": "FAQ-公用系统-0518",
+    "expected_team": "热控"
+  },
+  {
+    "query": "公用系统尿素站结焦",
+    "expected_doc_id": "FAQ-公用系统-2566",
+    "expected_team": "热控"
+  },
+  {
+    "query": "公用系统间冷塔温度异常升高",
+    "expected_doc_id": "FAQ-公用系统-1424",
+    "expected_team": "热控"
+  },
+  {
+    "query": "公用系统间冷塔跳闸",
+    "expected_doc_id": "FAQ-公用系统-0901",
+    "expected_team": "热控"
+  },
+  {
+    "query": "公用系统间冷塔密封失效",
+    "expected_doc_id": "FAQ-公用系统-1201",
+    "expected_team": "热控"
+  }
+]

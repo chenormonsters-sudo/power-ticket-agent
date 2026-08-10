@@ -1,0 +1,29 @@
+# 火电两票协同智能审查与设备运维多 Agent 系统
+# 依赖清单
+
+# === 核心 ===
+fastapi>=0.110.0
+uvicorn[standard]>=0.27.0
+pydantic>=2.7.0
+pydantic-settings>=2.2.0
+
+# === LangChain + LangGraph ===
+langchain>=1.3.0
+langchain-core>=1.4.0
+langchain-openai>=1.3.0
+langgraph>=1.2.0
+httpx>=0.27.0
+
+# === 知识检索 ===
+pymilvus>=2.5
+chromadb>=0.5.0
+jieba>=0.42
+rank-bm25>=0.2
+sentence-transformers>=3.0
+transformers>=4.45
+torch>=2.0
+
+# === 工程 ===
+tenacity>=8.0
+structlog>=24.0
+PyYAML>=6.0

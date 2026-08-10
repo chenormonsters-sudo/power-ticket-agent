@@ -1,0 +1,29 @@
+{
+  "test_cases": [
+    {"query": "磨煤机振动超标需要怎么处理", "expected_team": "锅炉班", "expected_intent": "处置方案查询"},
+    {"query": "空预器卡涩是什么原因引起的", "expected_team": "锅炉班", "expected_intent": "故障原因排查"},
+    {"query": "凝结水泵轴承温度高怎么解决", "expected_team": "汽机班", "expected_intent": "处置方案查询"},
+    {"query": "发电机励磁故障怎么处理", "expected_team": "电气班", "expected_intent": "处置方案查询"},
+    {"query": "输煤皮带跑偏了怎么办", "expected_team": "燃除班", "expected_intent": "处置方案查询"},
+    {"query": "DCS信号丢失原因", "expected_team": "热控班", "expected_intent": "故障原因排查"},
+    {"query": "引风机电流多大正常", "expected_team": "锅炉班", "expected_intent": "设备参数查询"},
+    {"query": "给水泵出力下降原因", "expected_team": "汽机班", "expected_intent": "故障原因排查"},
+    {"query": "开关柜跳闸后怎么恢复", "expected_team": "电气班", "expected_intent": "处置方案查询"},
+    {"query": "除尘器效率低怎么调整", "expected_team": "燃除班", "expected_intent": "处置方案查询"},
+    {"query": "修磨煤机需要什么工具", "expected_team": "锅炉班", "expected_intent": "工器具准备"},
+    {"query": "汽轮机检修需要哪些安全措施", "expected_team": "汽机班", "expected_intent": "安全风险确认"},
+    {"query": "以前磨煤机出过类似故障吗", "expected_team": "锅炉班", "expected_intent": "同类缺陷参考"},
+    {"query": "变压器油温多少正常", "expected_team": "电气班", "expected_intent": "设备参数查询"},
+    {"query": "输煤皮带更换工具清单", "expected_team": "燃除班", "expected_intent": "工器具准备"},
+    {"query": "过热器爆管以前发生过几次", "expected_team": "锅炉班", "expected_intent": "同类缺陷参考"},
+    {"query": "电除尘器检修危险点有哪些", "expected_team": "燃除班", "expected_intent": "安全风险确认"},
+    {"query": "执行器卡死怎么排查", "expected_team": "热控班", "expected_intent": "故障原因排查"},
+    {"query":"除氧器水位异常原因及处理","expected_team":"汽机班","expected_intent":"故障原因排查"},
+    {"query":"真空泵出力不足需要什么工具检修","expected_team":"汽机班","expected_intent":"工器具准备"},
+    {"query":"UPS故障处理步骤","expected_team":"电气班","expected_intent":"处置方案查询"},
+    {"query":"灰库气化风机风量多少","expected_team":"燃除班","expected_intent":"设备参数查询"},
+    {"query":"温度测点漂移怎么校准","expected_team":"热控班","expected_intent":"故障原因排查"},
+    {"query":"吹灰器检修必备工具","expected_team":"锅炉班","expected_intent":"工器具准备"},
+    {"query":"给煤机煤粉自流有什么风险","expected_team":"锅炉班","expected_intent":"安全风险确认"}
+  ]
+}

@@ -1,0 +1,105 @@
+# docker-compose.yml — 火电两票协同智能审查与设备运维多 Agent 系统
+# 一键拉起：docker compose up -d
+# 组件：backend(FastAPI) + streamlit(演示面板) + mysql(业务库) + milvus(生产向量库) + langfuse(追踪)
+# 说明：演示环境可不启 mysql/milvus（本地 numpy 缓存 + JSON 案例库即可跑通），
+#       生产形态启用全部组件；Langfuse 单独见 docker-compose.langfuse.yml
+
+services:
+  backend:
+    build: .
+    container_name: ticket_agent_backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      LLM_PROVIDER: ${LLM_PROVIDER:-deepseek}
+      DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY:-}
+      LANGFUSE_ENABLED: ${LANGFUSE_ENABLED:-false}
+      # 生产切换：LLM_PROVIDER=vllm + VLLM_BASE_URL 指向内网推理服务（断网私有化）
+    depends_on:
+      mysql:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+  streamlit:
+    build: .
+    container_name: ticket_agent_web
+    restart: unless-stopped
+    command: ["python", "-m", "streamlit", "run", "web/app.py", "--server.headless", "true", "--server.port", "8501"]
+    ports:
+      - "8501:8501"
+    environment:
+      DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY:-}
+    depends_on:
+      - backend
+
+  mysql:
+    image: mysql:8.0
+    container_name: ticket_agent_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD:-ticket_agent}
+      MYSQL_DATABASE: ticket_agent
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-p${MYSQL_PASSWORD:-ticket_agent}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  milvus:
+    image: milvusdb/milvus:v2.4.0
+    container_name: ticket_agent_milvus
+    restart: unless-stopped
+    command: ["milvus", "run", "standalone"]
+    environment:
+      ETCD_ENDPOINTS: etcd:2379
+      MINIO_ADDRESS: minio:9000
+    ports:
+      - "19530:19530"
+    volumes:
+      - milvus_data:/var/lib/milvus
+    depends_on:
+      etcd:
+        condition: service_started
+      minio:
+        condition: service_healthy
+
+  etcd:
+    image: quay.io/coreos/etcd:v3.5.14
+    restart: unless-stopped
+    environment:
+      ETCD_AUTO_COMPACTION_MODE: revision
+      ETCD_AUTO_COMPACTION_RETENTION: "1000"
+      ETCD_QUOTA_BACKEND_BYTES: "4294967296"
+    command: etcd --advertise-client-urls=http://127.0.0.1:2379 --listen-client-urls=http://0.0.0.0:2379 --data-dir=/etcd
+    volumes:
+      - etcd_data:/etcd
+
+  minio:
+    image: minio/minio:latest
+    restart: unless-stopped
+    command: server /data
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ACCESS_KEY:-minioadmin}
+      MINIO_ROOT_PASSWORD: ${MINIO_SECRET_KEY:-minioadmin}
+    volumes:
+      - minio_data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  mysql_data:
+  milvus_data:
+  etcd_data:
+  minio_data:

@@ -1,0 +1,233 @@
+{
+  "team_acc": 1.0,
+  "intent_acc": 0.84,
+  "faq_hit_rate": 1.0,
+  "total": 25,
+  "details": [
+    {
+      "q": "磨煤机振动超标需要怎么处理",
+      "team": "锅炉班",
+      "team_ok": true,
+      "intent": "处置方案查询",
+      "intent_ok": true,
+      "faq_hit": true,
+      "faq_score": 1.0
+    },
+    {
+      "q": "空预器卡涩是什么原因引起的",
+      "team": "锅炉班",
+      "team_ok": true,
+      "intent": "故障原因排查",
+      "intent_ok": true,
+      "faq_hit": true,
+      "faq_score": 1.0
+    },
+    {
+      "q": "凝结水泵轴承温度高怎么解决",
+      "team": "汽机班",
+      "team_ok": true,
+      "intent": "故障原因排查",
+      "intent_ok": false,
+      "faq_hit": true,
+      "faq_score": 1.0
+    },
+    {
+      "q": "发电机励磁故障怎么处理",
+      "team": "电气班",
+      "team_ok": true,
+      "intent": "处置方案查询",
+      "intent_ok": true,
+      "faq_hit": true,
+      "faq_score": 1.0
+    },
+    {
+      "q": "输煤皮带跑偏了怎么办",
+      "team": "燃除班",
+      "team_ok": true,
+      "intent": "故障原因排查",
+      "intent_ok": false,
+      "faq_hit": true,
+      "faq_score": 1.0
+    },
+    {
+      "q": "DCS信号丢失原因",
+      "team": "热控班",
+      "team_ok": true,
+      "intent": "故障原因排查",
+      "intent_ok": true,
+      "faq_hit": true,
+      "faq_score": 1.0
+    },
+    {
+      "q": "引风机电流多大正常",
+      "team": "锅炉班",
+      "team_ok": true,
+      "intent": "设备参数查询",
+      "intent_ok": true,
+      "faq_hit": true,
+      "faq_score": 1.0
+    },
+    {
+      "q": "给水泵出力下降原因",
+      "team": "汽机班",
+      "team_ok": true,
+      "intent": "故障原因排查",
+      "intent_ok": true,
+      "faq_hit": true,
+      "faq_score": 1.0
+    },
+    {
+      "q": "开关柜跳闸后怎么恢复",
+      "team": "电气班",
+      "team_ok": true,
+      "intent": "处置方案查询",
+      "intent_ok": true,
+      "faq_hit": true,
+      "faq_score": 1.0
+    },
+    {
+      "q": "除尘器效率低怎么调整",
+      "team": "燃除班",
+      "team_ok": true,
+      "intent": "处置方案查询",
+      "intent_ok": true,
+      "faq_hit": true,
+      "faq_score": 1.0
+    },
+    {
+      "q": "修磨煤机需要什么工具",
+      "team": "锅炉班",
+      "team_ok": true,
+      "intent": "工器具准备",
+      "intent_ok": true,
+      "faq_hit": true,
+      "faq_score": 1.0
+    },
+    {
+      "q": "汽轮机检修需要哪些安全措施",
+      "team": "汽机班",
+      "team_ok": true,
+      "intent": "安全风险确认",
+      "intent_ok": true,
+      "faq_hit": true,
+      "faq_score": 1.0
+    },
+    {
+      "q": "以前磨煤机出过类似故障吗",
+      "team": "锅炉班",
+      "team_ok": true,
+      "intent": "同类缺陷参考",
+      "intent_ok": true,
+      "faq_hit": true,
+      "faq_score": 1.0
+    },
+    {
+      "q": "变压器油温多少正常",
+      "team": "电气班",
+      "team_ok": true,
+      "intent": "设备参数查询",
+      "intent_ok": true,
+      "faq_hit": true,
+      "faq_score": 1.0
+    },
+    {
+      "q": "输煤皮带更换工具清单",
+      "team": "燃除班",
+      "team_ok": true,
+      "intent": "工器具准备",
+      "intent_ok": true,
+      "faq_hit": true,
+      "faq_score": 1.0
+    },
+    {
+      "q": "过热器爆管以前发生过几次",
+      "team": "锅炉班",
+      "team_ok": true,
+      "intent": "同类缺陷参考",
+      "intent_ok": true,
+      "faq_hit": true,
+      "faq_score": 1.0
+    },
+    {
+      "q": "电除尘器检修危险点有哪些",
+      "team": "燃除班",
+      "team_ok": true,
+      "intent": "安全风险确认",
+      "intent_ok": true,
+      "faq_hit": true,
+      "faq_score": 1.0
+    },
+    {
+      "q": "执行器卡死怎么排查",
+      "team": "热控班",
+      "team_ok": true,
+      "intent": "处置方案查询",
+      "intent_ok": false,
+      "faq_hit": true,
+      "faq_score": 1.0
+    },
+    {
+      "q": "除氧器水位异常原因及处理",
+      "team": "汽机班",
+      "team_ok": true,
+      "intent": "故障原因排查",
+      "intent_ok": true,
+      "faq_hit": true,
+      "faq_score": 1.0
+    },
+    {
+      "q": "真空泵出力不足需要什么工具检修",
+      "team": "汽机班",
+      "team_ok": true,
+      "intent": "工器具准备",
+      "intent_ok": true,
+      "faq_hit": true,
+      "faq_score": 1.0
+    },
+    {
+      "q": "UPS故障处理步骤",
+      "team": "电气班",
+      "team_ok": true,
+      "intent": "处置方案查询",
+      "intent_ok": true,
+      "faq_hit": true,
+      "faq_score": 1.0
+    },
+    {
+      "q": "灰库气化风机风量多少",
+      "team": "燃除班",
+      "team_ok": true,
+      "intent": "设备参数查询",
+      "intent_ok": true,
+      "faq_hit": true,
+      "faq_score": 1.0
+    },
+    {
+      "q": "温度测点漂移怎么校准",
+      "team": "热控班",
+      "team_ok": true,
+      "intent": "处置方案查询",
+      "intent_ok": false,
+      "faq_hit": true,
+      "faq_score": 1.0
+    },
+    {
+      "q": "吹灰器检修必备工具",
+      "team": "锅炉班",
+      "team_ok": true,
+      "intent": "工器具准备",
+      "intent_ok": true,
+      "faq_hit": true,
+      "faq_score": 1.0
+    },
+    {
+      "q": "给煤机煤粉自流有什么风险",
+      "team": "锅炉班",
+      "team_ok": true,
+      "intent": "安全风险确认",
+      "intent_ok": true,
+      "faq_hit": true,
+      "faq_score": 1.0
+    }
+  ]
+}
