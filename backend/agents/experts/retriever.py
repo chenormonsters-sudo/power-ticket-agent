@@ -205,6 +205,8 @@ class HybridRetriever:
         docs = self.team_index[team]
         bm25_hits = self._bm25_search(team, query, top_k * 3)
         vec_hits = self._vector_search(team, query, top_k * 3)
+        # 原始向量余弦分（未归一化，具绝对语义：正常匹配 0.6-0.8，领域外 <0.4）
+        raw_vec = {i: s for i, s in vec_hits}
 
         # 分数归一化（min-max 到 0~1）
         def _norm(hits):
@@ -228,6 +230,7 @@ class HybridRetriever:
             {
                 "doc": docs[i],
                 "score": round(s, 4),
+                "confidence": round(raw_vec.get(i, 0.0), 4),   # 绝对置信度（原始余弦）
                 "doc_id": docs[i].doc_id,
                 "source": docs[i].source,
             }
@@ -245,6 +248,12 @@ class HybridRetriever:
         if trace_id:
             self._trace_cache[cache_key] = results
         return results
+
+    def has_answer(self, team: str, query: str, threshold: float = 0.45) -> bool:
+        """拒答判定：Top-1 绝对置信度（原始余弦分）低于阈值视为无答案。
+        避免归一化相对分把乱码/领域外查询映射到高分而误判有答案。"""
+        results = self.search(team, query, top_k=1)
+        return bool(results) and results[0]["confidence"] >= threshold
 
 
 _retriever_singleton: HybridRetriever | None = None

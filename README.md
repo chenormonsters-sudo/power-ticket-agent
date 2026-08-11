@@ -29,7 +29,7 @@ DCS 测点流 → 监测 Agent（感知）→ 主控 Agent（编排整合）
 ## 快速开始（开发/演示）
 
 1. 创建 conda 环境并安装依赖：`conda env create -f environment.yml`（或 `pip install -r requirements.txt`）
-2. 配置 `.env.local`（模型网关：deepseek 模式用于开发）
+2. 配置 `.env.local`（模型网关：本地 vllm 模式，全程断网私有化）
 3. 构建知识库：`python knowledge_base/scripts/build_kb.py`（首次向量索引由检索器惰性构建并缓存）
 4. 启动后端：`python -m uvicorn backend.main:app --port 8000`
 5. 演示面板：`streamlit run web/app.py`（三页：监控看板/诊断工作台/知识闭环）
@@ -50,7 +50,7 @@ Reranker 对比结论：字面查询场景为负优化（Top-1 54%），按语�
 
 | 模式 | 模型 | 说明 |
 |---|---|---|
-| 开发/演示 | DeepSeek API | 模型网关配置切换，本地验证流程 |
+| 开发/演示 | 本地 vLLM 私有化模型 | 模型网关配置，断网本地验证流程 |
 | 生产 | 72B + vLLM（私有化） | 内网断网运行，对接 DCS 数据接口，满足等保合规 |
 
 容器化：`docker compose up -d`（backend + streamlit + mysql + milvus）；
