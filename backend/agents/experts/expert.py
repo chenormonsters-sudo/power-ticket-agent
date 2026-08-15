@@ -1,109 +1,85 @@
 """
-班组专家 Agent：检索本班组知识库 + LLM 结构化诊断。
+班组专家 Agent：ReAct 工具自主决策（检索策略由模型自主规划，预算兜底）。
 
-流程固定（可控优先）：检索（BM25+向量混合）→ 组装上下文 → LLM 输出结构化诊断意见。
+升级说明：不再固定"检索一次→分析→输出"，而是绑定工具集（查案例/查规程/看时间线），
+由 LLM 自主决定检索路径与轮次；每次工具调用留痕可审计；max_steps 兜底防发散。
 专家只输出研判素材，不做最终结论（无 AI 决策）。
 """
 from __future__ import annotations
 
-from langchain_core.messages import HumanMessage, SystemMessage
-
-from backend.agents.experts.retriever import get_retriever
 from backend.agents.experts.schemas import DiagnosisContext, ExpertOpinion
-from backend.base.llm_factory import get_structured_llm
+from backend.agents.experts.tools import build_expert_tools
+from backend.base.llm_factory import get_llm
 from backend.base.logger import get_logger
 
 logger = get_logger(__name__)
 
-_SYSTEM_PROMPT_TMPL = """你是{team}班组资深专家，负责对设备缺陷给出专业研判。
-
-工作方式：
-1. 基于知识库检索结果（本班组规程/历史缺陷案例）分析
-2. 输出可能原因（按可能性从高到低排序）、验证方法、影响评估
-3. 从检索结果中引用处置参考条目
-4. 给出置信度（0~1），证据不足时置信度降低
-
-严格要求：
-- 只输出研判素材，不做最终结论判定（最终结论由运行人员决定）
-- 原因必须与检索到的知识相关，不得凭空编造
-- 引用来源必须来自给定的检索结果"""
-
-_USER_PROMPT_TMPL = """【缺陷事件】
-事件编号：{event_id}
-设备：{device}（{teams}）
-严重度：{severity}
-
-【异常参数】
-{params}
-
-【事件时间线】
-{timeline}
-
-【本班组知识库检索结果】
-{search_results}
-
-请基于以上材料输出{team}班组的专业研判意见。"""
-
 
 class TeamExpertAgent:
-    """班组专家 Agent。"""
+    """班组专家 Agent（ReAct 工具自主决策）。
 
-    def __init__(self, team: str, agent_type: str, top_k: int = 5):
+    升级说明：不再固定"检索一次→分析→输出"，而是绑定工具集，
+    由 LLM 自主决定检索策略（先查案例还是规程、查几轮、证据不足追加检索），
+    预算由 recursion_limit 兜底（max_steps=5），每次工具调用留痕可审计。
+    """
+
+    def __init__(self, team: str, agent_type: str, top_k: int = 3, max_steps: int = 5):
         self.team = team
         self.agent_type = agent_type      # llm_factory 路由键：expert_boiler 等
         self.top_k = top_k
-
-    def _retrieve(self, query: str, trace_id: str | None = None) -> list[dict]:
-        """混合检索本班组知识库（携带 TraceID 幂等）。"""
-        retriever = get_retriever()
-        results = retriever.search(self.team, query, top_k=self.top_k, trace_id=trace_id)
-        logger.info("expert.retrieved", team=self.team, query=query[:30], hits=len(results))
-        return results
+        self.max_steps = max_steps
 
     async def diagnose(self, ctx: DiagnosisContext, trace_id: str | None = None) -> ExpertOpinion:
-        """对缺陷事件输出诊断意见（trace_id 缺省用 event_id）。"""
+        """对缺陷事件自主规划检索并输出诊断意见（ReAct 循环）。"""
+        from langgraph.prebuilt import create_react_agent
+        from langchain_core.messages import HumanMessage
+
         trace_id = trace_id or ctx.event_id
-        # 1. 检索：用设备+异常参数作为查询
+        tools, state = build_expert_tools(self.team, ctx, trace_id)
+
+        system = (
+            f"你是{self.team}班组资深专家，负责对设备缺陷给出专业研判。\n\n"
+            "你可以自主调用工具收集证据：\n"
+            "- 先用 search_cases 查历史案例（同类故障经验），再用 search_regulation 查规程知识\n"
+            "- 用 get_timeline 查看事件时间线（先后顺序有诊断意义：先振动后温度指向机械磨损，先温度后振动指向润滑恶化）\n"
+            "- 证据不足时可换关键词追加检索（最多 5 次工具调用）\n"
+            "- 证据充分后必须调用 finalize 提交意见，并基于证据量给出置信度（证据不足则降低）\n\n"
+            "严格要求：只输出研判素材，不做最终结论判定（最终结论由运行人员决定）；"
+            "原因必须与检索到的知识相关，不得凭空编造；引用来源必须来自检索结果。"
+        )
+
         params_desc = "；".join(
-            f"{p.get('point_id','')}={p.get('value','')}({p.get('detail','')})" for p in ctx.params
+            f"{p.get('point_id', '')}={p.get('value', '')}({p.get('detail', '')})" for p in ctx.params
         )
-        query = f"{ctx.device} {params_desc}"
-        results = self._retrieve(query, trace_id=trace_id)
-
-        # 2. 组装 Prompt
-        search_block = "\n".join(
-            f"[{i+1}] {r['doc'].text[:400]}（来源:{r['doc_id']}）"
-            for i, r in enumerate(results)
-        ) or "（本班组知识库无相关条目）"
-
-        timeline_block = "\n".join(
-            f"{t.get('ts','')} {t.get('point_id','')}: {t.get('event','')}" for t in ctx.timeline
-        ) or "（无）"
-
-        params_block = "\n".join(
-            f"- {p.get('point_id','')}: {p.get('value','')} — {p.get('detail','')}" for p in ctx.params
-        ) or "（无）"
-
-        messages = [
-            SystemMessage(content=_SYSTEM_PROMPT_TMPL.format(team=self.team)),
-            HumanMessage(content=_USER_PROMPT_TMPL.format(
-                event_id=ctx.event_id, device=ctx.device,
-                teams="、".join(ctx.teams), severity=ctx.severity,
-                params=params_block, timeline=timeline_block,
-                search_results=search_block, team=self.team,
-            )),
-        ]
-
-        # 3. 结构化输出
-        llm = get_structured_llm(self.agent_type, ExpertOpinion)
-        opinion = await llm.ainvoke(messages)
-        # 兜底：填充来源
-        if not opinion.sources:
-            opinion.sources = [r["doc_id"] for r in results[:3]]
-        logger.info(
-            "expert.diagnosed", team=self.team, device=ctx.device,
-            causes=len(opinion.possible_causes), confidence=opinion.confidence,
+        task = (
+            f"【缺陷事件】{ctx.event_id} | {ctx.device} | 班组 {ctx.teams} | 严重度 {ctx.severity}\n"
+            f"【异常参数】{params_desc or '无'}\n"
+            f"请自主规划检索路径，收集充分证据后调用 finalize 输出 {self.team} 班组诊断意见。"
         )
+
+        agent = create_react_agent(
+            model=get_llm(self.agent_type),
+            tools=tools,
+            prompt=system,
+        )
+        # 预算兜底：recursion_limit 控制总步数（thought+action+observation 每步计数），
+        # 防 Agent 发散循环（max_steps 次工具调用 ≈ 3×max_steps+4）
+        await agent.ainvoke(
+            {"messages": [HumanMessage(content=task)]},
+            config={"recursion_limit": self.max_steps * 3 + 4},
+        )
+
+        opinion = state.get("opinion")
+        if opinion is None:
+            # 兜底：未正常 finalize（超步数/异常）——不抛错，返回空意见并告警，由规则质检标记
+            logger.warning("expert.no_finalize", team=self.team, evt=ctx.event_id, hint="agent did not finalize")
+            opinion = ExpertOpinion(
+                team=self.team, device=ctx.device,
+                possible_causes=[], verification_methods=[], impact="",
+                disposal_reference=[], confidence=0.0, sources=[],
+            )
+        logger.info("expert.diagnosed", team=self.team, device=ctx.device,
+                    causes=len(opinion.possible_causes), confidence=opinion.confidence)
         return opinion
 
 
